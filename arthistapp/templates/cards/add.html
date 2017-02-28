@@ -1,0 +1,33 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-narrow">
+  <h1>Add Card</h1>
+    <br/>
+    <form id="cardForm" class="form form-card" method="POST" action="" role="form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-group">
+                {{form.artist.label}}
+                {{form.artist(placeholder="Artist", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.name.label}}
+                {{form.name(placeholder="Name", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.year.label}}
+                {{form.year(placeholder="Year", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.medium.label}}
+                {{form.medium(placeholder="Medium", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.img.label}}
+                {{form.img(placeholder="Image", class_="form-control")}}
+            </div>
+            <p><input class="btn btn-default btn-submit" type="submit" value="Add Card"></p>
+    </form>
+</div>
+{% endblock %}
+
