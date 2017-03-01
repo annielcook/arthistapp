@@ -4,16 +4,20 @@
     <h1>Welcome All Cards</h1>
     {% for card in cards %}
     <div id='card-{{card.id}}' class='jumbotron container'>
-             <div id='img' class='img col-lg-6'>
-                 <img src="{{ url_for('static', filename='public/img/' + card.img)  }}">
-             </div>
-             <div id='text-card-{{card.id}}' class='col-lg-6 hidden-lg text-col'>
-                 <h3>Artist: <p id='artist'>{{ card.artist }}</p></h3>
-                 <h3>Name: <p id='name'>{{ card.name  }}</p></h3>
-                 <h3>Year: <p id='year'>{{ card.year }}</p></h3>
-                 <h3>Medium: <p id='medium'>{{ card.medium }}</p></h3>
-             </div>
-         </div>
+        <div id='img' class='img col-lg-6'>
+            <img src="{{ url_for('static', filename='public/img/' + card.img)  }}">
+        </div>
+        <div id='text-card-{{card.id}}' class='col-lg-5 hidden-lg text-col'>
+            <h3>Artist: <p id='artist'>{{ card.artist }}</p></h3>
+            <h3>Name: <p id='name'>{{ card.name  }}</p></h3>
+            <h3>Year: <p id='year'>{{ card.year }}</p></h3>
+            <h3>Medium: <p id='medium'>{{ card.medium }}</p></h3>
+        </div>
+        <form action="{{ url_for('card.delete', postId=card.id) }}" method='post'>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <input class='pull-right' type='submit' value='x'></input>
+        </form>
+    </div>
      {% endfor %}
 
 {% endblock %}
