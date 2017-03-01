@@ -12,6 +12,13 @@
             <h3>Name: <p id='name'>{{ card.name  }}</p></h3>
             <h3>Year: <p id='year'>{{ card.year }}</p></h3>
             <h3>Medium: <p id='medium'>{{ card.medium }}</p></h3>
+            <h3>Notes: 
+                <ul>
+                {% for note in card.formatted_notes %}
+                <li><p>{{ note }}</p></li>
+                {% endfor %}
+                </ul>
+            </h3>
         </div>
         <form action="{{ url_for('card.delete', postId=card.id) }}" method='post'>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>

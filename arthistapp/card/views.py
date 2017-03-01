@@ -14,6 +14,8 @@ blueprint = Blueprint('card', __name__, url_prefix='/cards', static_folder='../s
 def cards():
     """Show cards"""
     cards = Card.query.all()
+    for card in cards:
+        card.formatted_notes = card.format_notes(card.notes)
     return render_template('cards/all.html', cards=cards)
 
 
@@ -22,7 +24,7 @@ def cards():
 def add():
     form = CardForm(request.form, csrf_enabled=False)
     if form.validate_on_submit():
-        Card.create(artist=form.artist.data, name=form.name.data, year=form.year.data, medium=form.medium.data, img=form.img.data)
+        Card.create(artist=form.artist.data, name=form.name.data, year=form.year.data, medium=form.medium.data, notes=form.notes.data, img=form.img.data)
         flash('Successfully added!')
     return render_template('cards/add.html', form=form)
 

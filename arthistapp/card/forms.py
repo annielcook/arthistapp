@@ -16,6 +16,7 @@ class CardForm(Form):
                         validators=[DataRequired(), Length(min=2, max=50)])
     year = StringField('Year')
     medium = StringField('Medium')
+    notes = StringField('Notes')
     img = StringField('Image', validators=[DataRequired()])
 
     def __init__(self, *args, **kwargs):
