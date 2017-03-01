@@ -35,3 +35,25 @@ def delete(postId):
     db.session.commit()
     cards = Card.query.all()
     return redirect('/cards')
+
+
+@blueprint.route('/update/<int:postId>', methods=['POST'])
+@login_required
+def update(postId):
+    card = Card.query.get(postId)
+    form = CardForm(request.form, csrf_enabled=False)
+    if form.validate_on_submit():
+        card.artist = form.artist.data
+        card.name = form.name.data
+        card.year = form.year.data
+        card.medium = form.medium.data
+        card.notes = form.notes.data
+        card.img = form.img.data
+        db.session.commit()
+    form.artist.data = card.artist
+    form.name.data = card.name
+    form.year.data = card.year
+    form.medium.data = card.medium
+    form.notes.data = card.notes
+    form.img.data = card.img
+    return render_template('cards/update.html', form=form)

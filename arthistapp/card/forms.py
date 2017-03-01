@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """User forms."""
 from flask_wtf import Form
-from wtforms import StringField
+from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, EqualTo, Length
 
 from .models import Card
@@ -16,7 +16,7 @@ class CardForm(Form):
                         validators=[DataRequired(), Length(min=2, max=50)])
     year = StringField('Year')
     medium = StringField('Medium')
-    notes = StringField('Notes')
+    notes = TextAreaField('Notes')
     img = StringField('Image', validators=[DataRequired()])
 
     def __init__(self, *args, **kwargs):
