@@ -10,7 +10,7 @@ blueprint = Blueprint('card', __name__, url_prefix='/cards', static_folder='../s
 
 
 @blueprint.route('/')
-@login_required
+#@login_required
 def cards():
     """Show cards"""
     cards = Card.query.all()
@@ -20,7 +20,7 @@ def cards():
 
 
 @blueprint.route('/add', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def add():
     form = CardForm(request.form, csrf_enabled=False)
     if form.validate_on_submit():
@@ -29,7 +29,7 @@ def add():
     return render_template('cards/add.html', form=form)
 
 @blueprint.route('/delete/<int:postId>', methods=['POST'])
-@login_required
+#@login_required
 def delete(postId):
     Card.query.filter_by(id=postId).delete()
     db.session.commit()
@@ -38,7 +38,7 @@ def delete(postId):
 
 
 @blueprint.route('/update/<int:postId>', methods=['POST'])
-@login_required
+#@login_required
 def update(postId):
     card = Card.query.get(postId)
     form = CardForm(request.form, csrf_enabled=False)
@@ -50,6 +50,8 @@ def update(postId):
         card.notes = form.notes.data
         card.img = form.img.data
         db.session.commit()
+        cards = Card.query.all()
+        return redirect('/cards')
     form.artist.data = card.artist
     form.name.data = card.name
     form.year.data = card.year
