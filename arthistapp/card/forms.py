@@ -13,7 +13,7 @@ class CardForm(Form):
     artist = StringField('Artist',
                            validators=[Length(min=0, max=50)])
     name = StringField('Name',
-                        validators=[DataRequired(), Length(min=2, max=50)])
+                        validators=[DataRequired(), Length(min=2, max=100)])
     year = StringField('Year')
     medium = StringField('Medium')
     notes = TextAreaField('Notes')

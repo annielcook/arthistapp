@@ -12,7 +12,7 @@ class Card(SurrogatePK, Model):
 
     __tablename__ = 'cards'
     artist = Column(db.String(80), nullable=True)
-    name = Column(db.String(80),  nullable=False)
+    name = Column(db.String(200),  nullable=False)
     year = Column(db.String(20), nullable=True)
     medium = Column(db.String(30), nullable=True)
     img = Column(db.String(30), nullable=False)
