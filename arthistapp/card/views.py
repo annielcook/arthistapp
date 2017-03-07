@@ -18,6 +18,8 @@ def cards():
         card.formatted_notes = card.format_notes(card.notes)
     return render_template('cards/all.html', cards=cards)
 
+def star():
+    cards = Card.query
 
 @blueprint.route('/add', methods=['GET', 'POST'])
 #@login_required
